@@ -1,17 +1,17 @@
-import { NextResponse } from 'next/server';
-import { prisma } from '@lib/prisma'; // Import từ file vừa tạo
+import { NextResponse } from "next/server";
+import { prisma } from "@lib/prisma";
 
 // GET: Lấy danh sách từ Database
 export async function GET() {
   try {
     const todos = await prisma.todo.findMany({
       orderBy: {
-        createdAt: 'asc', // Sắp xếp cũ nhất lên đầu
+        createdAt: "asc", // Sắp xếp cũ nhất lên đầu
       },
     });
     return NextResponse.json(todos);
   } catch (error) {
-    return NextResponse.json({ error: 'Error fetching todos' }, { status: 500 });
+    return NextResponse.json({ error: "Error fetching todos" }, { status: 500 });
   }
 }
 
@@ -21,7 +21,7 @@ export async function POST(request: Request) {
     const body = await request.json();
 
     if (!body.title) {
-      return NextResponse.json({ error: 'Title is required' }, { status: 400 });
+      return NextResponse.json({ error: "Title is required" }, { status: 400 });
     }
 
     const newTodo = await prisma.todo.create({
@@ -33,6 +33,6 @@ export async function POST(request: Request) {
 
     return NextResponse.json(newTodo, { status: 201 });
   } catch (error) {
-    return NextResponse.json({ error: 'Error creating todo' }, { status: 500 });
+    return NextResponse.json({ error: "Error creating todo" }, { status: 500 });
   }
 }
