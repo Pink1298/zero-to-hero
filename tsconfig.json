@@ -21,7 +21,6 @@
     "paths": {
       "@/*": ["./*"],
       "@lib/*": ["./app/lib/*"],
-      "@prisma/*": ["./app/generated/prisma/*"]
     }
   },
   "include": [
